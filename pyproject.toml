@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "pomodoro"
+version = "0.1.0"
+description = "🌟 Pomodoro CLI 🍅⏳ A simple and practical Pomodoro tool for your terminal! 📱💻 Organize your time efficiently with countdowns and sound alerts. Perfect for boosting productivity with focus and breaks! 🚀"
+authors = ["Gustavo Soares <gustavo.soares.cdc@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/GussSoares/pomodoro-cli"
+repository = "https://github.com/GussSoares/pomodoro-cli"
+keywords = ["pomodoro", "cli", "terminal", "linux", "python", "curses", "timer"]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+faker = "^36.1.1"
+pyfiglet = "^1.0.2"
+
+[tool.poetry.scripts]
+pomodoro = "pomodoro.main:main"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
