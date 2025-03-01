@@ -34,22 +34,17 @@ class Pomodoro:
     def info_message(self):
         return Messages.PAUSE.value if self.pause else Messages.WORK.value
 
-    def update_clock(self):
+    def update_clock(self, pause: bool = False):
         if self.second < 59:
             self.second += 1
         else:
             self.minute += 1
             self.second = 0
 
-        if self.second == Constants.MINUTES_TO_PAUSE.value and not self.pause:
+        if self.second == Constants.MINUTES_TO_PAUSE.value or self.pause:
             self.minute = 0
             self.second = 0
-            self.pause = True
-            
-        if self.second == Constants.MINUTES_TO_PAUSE.value and self.pause:
-            self.minute = 0
-            self.second = 0
-            self.pause = False
+            self.pause = not self.pause
 
     def get_center_xpos(self, text_length: int, max_x: int = None) -> int:
         return int(((max_x or self.max_x) // 2) - (text_length // 2) - (text_length % 2))
@@ -83,8 +78,13 @@ class Pomodoro:
 
     def main(self, _):
         while True:
-            if self.window.getch() == ord('q'):
+            k = self.window.getch()
+            quick_pause = False
+
+            if k == ord('q'):
                 sys.exit()
+            if k == ord('p'):
+                quick_pause = not quick_pause
 
             self.window.clear()
             self.init_panel()
@@ -98,10 +98,10 @@ class Pomodoro:
 
             self.window.addstr(aux_y, self.get_center_xpos(self.info_message.__len__()), self.info_message)
 
-            self.update_clock()
+            self.update_clock(pause=quick_pause)
 
             self.window.refresh()
-            time.sleep(1)        
+            time.sleep(1)
 
     def start(self):
         try:
