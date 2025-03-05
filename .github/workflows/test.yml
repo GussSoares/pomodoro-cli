@@ -1,0 +1,19 @@
+name: Publish package
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ruff
+        uses: jpetrucciani/ruff-check@main
+        with:
+          path: 'pomodoro/'
