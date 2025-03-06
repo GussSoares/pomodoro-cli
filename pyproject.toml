@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pomodoro"
+name = "pomodoro-app-cli"
 version = "1.0.0"
 description = "🌟 Pomodoro CLI 🍅⏳ A simple and practical Pomodoro tool for your terminal! 📱💻 Organize your time efficiently with countdowns and sound alerts. Perfect for boosting productivity with focus and breaks! 🚀"
 authors = ["Gustavo Soares <gustavo.soares.cdc@gmail.com>"]
@@ -12,10 +12,12 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+packages = [
+    {include = "pomodoro"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-faker = "^36.1.1"
 pyfiglet = "^1.0.2"
 
 [tool.poetry.scripts]
