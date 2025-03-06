@@ -13,7 +13,7 @@ Organize your time efficiently with countdowns and sound alerts. Perfect for boo
 ## Installation:
 You can install Pomodoro CLI directly from PyPI using pip:  
 ```bash
-pip install pomodoro
+pip install pomodoro-app-cli
 ```
 
 ## Usage:
