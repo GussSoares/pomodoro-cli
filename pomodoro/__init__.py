@@ -6,8 +6,6 @@ import pyfiglet
 
 from pomodoro.constants import Constants, Messages
 
-__version__ = "0.1.0"
-
 
 class Pomodoro:
     def __init__(self):
