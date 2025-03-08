@@ -4,6 +4,7 @@ import sys
 import time
 import pathlib
 import configparser
+import subprocess
 
 import pyfiglet
 
@@ -15,6 +16,7 @@ PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class Pomodoro:
     def __init__(self, restore: bool = False, mute: bool = False):
+        self.mute = mute
         self.pause = False
         self.rest = False
         self.minute = 0
@@ -55,6 +57,14 @@ class Pomodoro:
             return Messages.REST.value
         return Messages.WORK.value
 
+    def play_audio(self):
+        process = subprocess.Popen(['aplay', f'{PACKAGE_DIR}/audio.wav'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(4)
+        process.kill()
+
+    def notify(self, message: str):
+        subprocess.Popen(['notify-send', '-a', 'Pomodoro-app-cli', 'Pomodoro', message, '-i', 'terminal', '-t', '5000'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
     def init_config_file(self):
         if not pathlib.Path(self.config_file_path).exists():
             with open(self.config_file_path, 'w'):
@@ -92,6 +102,7 @@ class Pomodoro:
             self.minute += 1
             self.second = 0
 
+
         if self.loop == 4:
             long_rest = True
 
@@ -99,12 +110,18 @@ class Pomodoro:
             self.minute = 0
             self.second = 0
             self.rest = True
+            self.notify(Messages.REST.value)
+            if not self.mute:
+                self.play_audio()
 
         if self.rest and self.minute == Constants.MINUTES_TO_REST.value and not long_rest:
             self.minute = 0
             self.second = 0
             self.rest = False
             self.loop += 1
+            self.notify(Messages.WORK.value)
+            if not self.mute:
+                self.play_audio()
 
         elif self.rest and self.minute == Constants.MINUTES_TO_LONG_REST.value and long_rest:
             self.minute = 0
@@ -112,6 +129,9 @@ class Pomodoro:
             self.rest = False
             self.loop =  0
             long_rest = False
+            self.notify(Messages.WORK.value)
+            if not self.mute:
+                self.play_audio()
 
     def get_center_xpos(self, text_length: int, max_x: int = None) -> int:
         return int(((max_x or self.max_x) // 2) - (text_length // 2) - (text_length % 2))
@@ -152,6 +172,10 @@ class Pomodoro:
                 sys.exit()
             if k == ord('p'):
                 self.pause = not self.pause
+                if self.pause:
+                    self.notify(Messages.NOTIFY_PAUSE.value)
+                else:
+                    self.notify(Messages.NOTIFY_READY.value)
 
             self.window.clear()
             self.init_panel()
