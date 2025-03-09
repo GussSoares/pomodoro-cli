@@ -10,7 +10,7 @@ def init_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-r', '--restore', action='store_true', help='restore previous pomodoro closed')
-    parser.add_argument('-m', '--mute', action='store_true', help='(coming soon) mute pomodoro alarms')
+    parser.add_argument('-m', '--mute', action='store_true', help='mute pomodoro alarms')
     parser.add_argument('-c', '--config', action='store_true', help='(coming soon) configure times to your custom values')
     parser.add_argument('-v', '--version', action='store_true', help='show current version')
     

@@ -160,7 +160,7 @@ class Pomodoro:
         # === statusbar ===
         self.window.attron(curses.color_pair(3))
         self.window.addstr(self.max_y - 1, 1, Messages.STATUSBAR.value)
-        self.window.addstr(self.max_y - 1, len(Messages.STATUSBAR.value), " " * (self.max_x - len(Messages.STATUSBAR.value) - 1))
+        self.window.addstr(self.max_y - 1, len(Messages.STATUSBAR.value) + 1, " " * (self.max_x - len(Messages.STATUSBAR.value) - 2))
         self.window.attroff(curses.color_pair(3))
 
     def main(self, _):
