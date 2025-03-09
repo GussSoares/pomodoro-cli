@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pomodoro-app-cli"
-version = "1.2.0"
+version = "1.2.1"
 description = "🌟 Pomodoro CLI 🍅⏳ A simple and practical Pomodoro tool for your terminal! 📱💻 Organize your time efficiently with countdowns and sound alerts. Perfect for boosting productivity with focus and breaks! 🚀"
 authors = ["Gustavo Soares <gustavo.soares.cdc@gmail.com>"]
 license = "MIT"
