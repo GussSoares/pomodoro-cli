@@ -17,7 +17,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 pyfiglet = "^1.0.2"
 
 [tool.poetry.scripts]
