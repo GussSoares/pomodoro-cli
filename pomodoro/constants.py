@@ -14,4 +14,4 @@ class Messages(Enum):
     NOTIFY_PAUSE = "⏰ Your pomodoro is paused!"
     NOTIFY_READY = "✨ Your pomodoro is ready!"
     WORK = "Back to work now!"
-    STATUSBAR = "Press 'q' or 'ctrl + c' to exit | STATUS BAR"
+    STATUSBAR = "Press 'q' or 'ctrl + c' to exit | Press 'p' to pause"
