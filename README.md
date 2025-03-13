@@ -10,13 +10,20 @@ Organize your time efficiently with countdowns and sound alerts. Perfect for boo
 ## Features:
 - Start, pause, and restart  Pomodoro cycles 🍅⏳
 - Sound notifications to keep you on track 🔔
-- Customizable work and break durations _(coming soon)_ ⏰
-- Simple and intuitive terminal interface
+- Customizable work and break durations ⏰
+- Simple and intuitive terminal interface 💻
+- Self update command to be your pomodoro always up to dated ✅
 
 ## Installation:
 You can install Pomodoro CLI directly from PyPI using pip:  
 ```bash
 pip install pomodoro-app-cli
+```
+
+or
+
+```bash
+pipx install pomodoro-app-cli
 ```
 
 ## Usage:
