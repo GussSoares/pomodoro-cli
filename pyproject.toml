@@ -19,6 +19,8 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.9"
 pyfiglet = "^1.0.2"
+rich = "^13.9.4"
+inquirerpy = "^0.3.4"
 
 [tool.poetry.scripts]
 pomodoro = "pomodoro.main:main"
