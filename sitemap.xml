@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/api/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/api/config/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/api/constants/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/api/main/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+         <loc>https://GussSoares.github.io/pomodoro-cli/api/pomodoro/</loc>
+         <lastmod>2025-04-02</lastmod>
+    </url>
+</urlset>
