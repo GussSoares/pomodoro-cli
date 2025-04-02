@@ -3,7 +3,7 @@
 [![Ruff Tests](https://github.com/GussSoares/pomodoro-cli/actions/workflows/test.yml/badge.svg)](https://github.com/GussSoares/pomodoro-cli/actions/workflows/test.yml)
 [![Release](https://github.com/GussSoares/pomodoro-cli/actions/workflows/publish.yml/badge.svg)](https://github.com/GussSoares/pomodoro-cli/actions/workflows/publish.yml)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pomodoro-app-cli)
-
+[![Update Docs](https://github.com/GussSoares/pomodoro-cli/actions/workflows/docs.yml/badge.svg)](https://github.com/GussSoares/pomodoro-cli/actions/workflows/docs.yml)
 
 A simple and practical Pomodoro tool for your terminal! 📱💻
 
