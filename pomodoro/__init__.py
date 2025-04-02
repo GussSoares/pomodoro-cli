@@ -1,3 +1,9 @@
+"""
+!!! abstract "Presentation"
+    You will read below about main pomodoro class, describing all methods, attributes and examples
+
+    _Author: Gustavo Soares_
+"""
 import curses
 import os
 import sys
@@ -19,6 +25,37 @@ SETTINGS_PATH = os.path.join(PACKAGE_DIR, 'settings.ini')
 
 
 class Pomodoro:
+    """
+    Pomodoro Application
+    
+    This class is responsible by run the pomodoro in terminal, showing clock, update screen second by second.
+    The main funcionalities are: play, pause, resume, mute and config
+    
+    
+    Attributes:
+        restore (bool): restore the last pomodoro time whe you close accidentally
+        mute (bool): mute the song when pomodoro its time
+        no_interface (bool): use this flag only whe no need show curse interface. Ex: config command
+
+    Methods:
+        version() -> str:
+        update() -> None:
+        play_audio() -> None:
+        notify() -> None:
+        init_config_file() -> None:
+        prompt_config() -> None:
+        get_config() -> ConfigParser:
+        set_config() -> None:
+        set_custom_time() -> None:
+        save() -> None:
+        update_clock() -> None:
+        get_center_xpos() -> int:
+        get_center_ypos() -> int:
+        write_work_message() -> None:
+        init_panel() -> None:
+        main() -> None:
+        start() -> None:
+    """
     def __init__(self, restore: bool = False, mute: bool = False, no_interface: bool = False):
         self.mute = mute
         self.pause = False
@@ -72,6 +109,15 @@ class Pomodoro:
 
     @staticmethod
     def version(show: bool = False) -> str:
+        """
+        Return or print the current version of pomodoro
+        
+        Attributes:
+            show (bool): return version and print in screen
+        
+        Returns:
+            version (str): the version number
+        """
         version = importlib.metadata.version("pomodoro-app-cli")
         if show:
             print(f'✨ {version}')
@@ -79,18 +125,49 @@ class Pomodoro:
 
     @staticmethod
     def update() -> None:
+        """
+        Update the pomodoro application like:
+        
+        !!! tip "Code used"
+            ``` sh
+            pip install --upgrade pomodoro-app-cli
+            ```
+        """
         Config().update(lambda: subprocess.check_output(['pip', 'install', '--upgrade', 'pomodoro-app-cli', '--break-system-packages']))
         Pomodoro.version(show=True)
         # subprocess.Popen(['pip', 'install', '--upgrade', 'pomodoro-app-cli', '--break-system-packages'])
         sys.exit()
 
     def play_audio(self):
+        """
+        Play sound of audio.wav using aplay linux command like:
+        
+        !!! tip "Code used"
+            ```sh
+            aplay audio.wav --duration 2
+            ```
+        """
         subprocess.Popen(['aplay', f'{PACKAGE_DIR}/audio.wav', '--duration', '2'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def notify(self, message: str):
+        """Show a popup notification in linux using notify-send
+
+        Args:
+            message (str): message to show in notification popup
+        
+        !!! tip "Code used"
+        
+            ```sh
+            notify-send -a "Pomodoro-app-cli" "Pomodoro" "message to show" -i terminal -t 5000
+            ```
+        
+        """
         subprocess.Popen(['notify-send', '-a', 'Pomodoro-app-cli', 'Pomodoro', message, '-i', 'terminal', '-t', '5000'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def init_config_file(self):
+        """
+        Initialize config file to save and retrieve time of work and time of rest.
+        """
         if not pathlib.Path(SETTINGS_PATH).exists():
             config = configparser.ConfigParser()
             config['CustomTime'] = {
@@ -112,11 +189,23 @@ class Pomodoro:
 
     @staticmethod
     def get_config() -> configparser.ConfigParser:
+        """
+        Return config saved in config.ini file
+
+        Returns:
+            config (configparser.ConfigParser): Config object with all settings in config.ini file 
+        """
         config = configparser.ConfigParser()
         config.read(SETTINGS_PATH)
         return config
 
     def set_config(self, config: Dict[str, dict]) -> None:
+        """
+        Set configs passed in config dict to save in config.ini
+
+        Args:
+            config (Dict[str, dict]): configuration dict
+        """
         _config = self.get_config()
 
         for section, conf in config.items():
@@ -130,6 +219,13 @@ class Pomodoro:
             _config.write(configfile)
 
     def set_custom_time(self, work_time: int = None, rest_time: int = None) -> None:
+        """
+        Set only work_time and rest_time in config.ini file
+
+        Args:
+            work_time (int, optional): time to work in minutes. Defaults to None.
+            rest_time (int, optional): time to rest in minutes. Defaults to None.
+        """
         SECTION = 'CustomTime'
         config = self.get_config()
 
@@ -145,6 +241,10 @@ class Pomodoro:
             config.write(configfile)
 
     def save(self) -> None:
+        """
+        Notes:
+            Coming soon
+        """
         self.set_config(config={
             'Settings': {
                 'pause': self.pause,
@@ -156,6 +256,10 @@ class Pomodoro:
         })
 
     def update_clock(self):
+        """
+        Notes:
+            Coming soon
+        """
         long_rest = False
         
         if self.pause:
@@ -198,12 +302,36 @@ class Pomodoro:
                 self.play_audio()
 
     def get_center_xpos(self, text_length: int, max_x: int = None) -> int:
+        """
+        Calculate the correct horizontal position to start the text
+
+        Args:
+            text_length (int): length of text to show
+            max_x (int, optional): max length available to write the text. Defaults to None.
+
+        Returns:
+            x_pos (int): horizontal position to start text
+        """
         return int(((max_x or self.max_x) // 2) - (text_length // 2) - (text_length % 2))
 
     def get_center_ypos(self, text_height: int, max_y: int = None) -> int:
+        """
+        Calculate the correct vertiocal position to start the text
+
+        Args:
+            text_height (int): height of text
+            max_y (int, optional): max length available to write the text. Defaults to None.
+
+        Returns:
+            y_pos (int): vertical position to start text
+        """
         return int(((max_y or self.max_y) // 2) + (text_height // 2) - (text_height % 2))
 
     def write_work_message(self):
+        """
+        Notes:
+            Coming soon
+        """
         self.window.addstr(
             self.get_center_ypos(1),
             self.get_center_xpos(Messages.WORK.value.__len__()),
@@ -213,6 +341,10 @@ class Pomodoro:
         self.window.refresh()
 
     def init_panel(self):
+        """
+        Notes:
+            Coming soon
+        """
         self.window.border()
         self.window.addstr(
             0,
@@ -231,6 +363,10 @@ class Pomodoro:
         self.window.attroff(curses.color_pair(3))
 
     def main(self, _):
+        """
+        Notes:
+            Coming soon
+        """
         self.play_audio()
         try:
             while True:
@@ -266,6 +402,10 @@ class Pomodoro:
             curses.endwin()
 
     def start(self):
+        """
+        Notes:
+            Coming soon
+        """
         try:
             curses.wrapper(self.main)
         except curses.error:

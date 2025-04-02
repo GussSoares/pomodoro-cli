@@ -6,7 +6,27 @@ from pomodoro import Pomodoro
 
 
 def init_args() -> argparse.Namespace:
-    """Initialize arguments and return arg parser"""
+    """
+    Initialize arguments and return arg parser
+    
+    Attributes:
+        -r,--restore (bool): restore previous pomodoro closed
+        -m,--mute (bool): mute pomodoro alarms
+        -c,--config (bool): configure times to your custom values
+        -u,--update (bool): update your pomodoro app version
+        -v,--version (bool): show current version
+    
+    Returns:
+        parser (Namespace): a object with all arguments
+    
+    Example
+    -------
+    ``` python
+    args = init_args()
+    args.restore
+    True
+    ```
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-r', '--restore', action='store_true', help='restore previous pomodoro closed')
@@ -22,8 +42,12 @@ def version() -> None:
     """
     Print the current app version
 
-    >>> pomodoro --version
+    Example
+    -------
+    ``` sh
+    pomodoro --version
     ✨ 1.0.0
+    ```
     """
     print(f'✨ {importlib.metadata.version("pomodoro-app-cli")}')
     sys.exit()
